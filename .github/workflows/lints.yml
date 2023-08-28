@@ -27,4 +27,4 @@ jobs:
         hatch run lint:lint
     - name: Check code formatting with black
       run: |
-        hatch run lint:format
+        hatch --env lint run black --check .
