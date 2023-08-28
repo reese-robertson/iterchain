@@ -1,10 +1,10 @@
-[![Documentation Status](https://readthedocs.org/projects/iterchain/badge/?version=latest)](https://iterchain.readthedocs.io/en/latest/?badge=latest)
-
 Iterchain: Iterator chaining for Python
 =======================================
 
 Iterchain is a library intended to make manipulating iterators in Python easier and more ergonomic.
 The design is heavily inspired by the [Rust iterator design](https://doc.rust-lang.org/std/iter/index.html), and a lot of the functionality comes from the standard Python [itertools](https://docs.python.org/3/library/itertools.html) library.
+
+This is a fork from [Evelyn-H](https://github.com/Evelyn-H/iterchain). All credit goes to them, this is an exploration in adding additional functionality to what they built.
 
 ## Installation
 
@@ -15,7 +15,7 @@ pip install iterchain
 
 For the development version:
 ```
-git clone https://github.com/Evelyn-H/iterchain.git
+git clone https://github.com/reese-robertson/iterchain.git
 pip install -e iterchain
 ```
 

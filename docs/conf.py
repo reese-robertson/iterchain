@@ -4,12 +4,6 @@
 # list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
-# -- Pylint configuration ----------------------------------------------------
-
-# Pylint is unhappy here
-
-# pylint: disable=redefined-builtin
-
 
 # -- Path setup --------------------------------------------------------------
 
@@ -29,7 +23,7 @@ sys.path.insert(0, os.path.abspath(".."))
 # -- Project information -----------------------------------------------------
 
 project = "iterchain"
-copyright = "2019, Evelyn-H"
+project_copyright = "2019, Evelyn-H"
 author = "Evelyn-H"
 
 
@@ -80,7 +74,7 @@ html_sidebars = {
 
 html_theme_options = {
     # 'logo': 'logo.png',
-    "github_user": "Evelyn-H",
+    "github_user": "reese-robertson",
     "github_repo": "iterchain",
     "github_banner": True,
     "github_button": True,
