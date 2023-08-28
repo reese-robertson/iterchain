@@ -1,5 +1,13 @@
 [envs.test]
 dependencies = ["pytest"]
 
+[envs.lint]
+detached = true
+dependencies = ["pylint", "black"]
+
+[envs.lint.scripts]
+lint = "pylint $(git ls-files '*.py')"
+format = "black ."
+
 [publish.index]
 disable = true

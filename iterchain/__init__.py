@@ -44,5 +44,6 @@ Overview
 
 # simplify public interface
 from .core import Iterator, chainable
+
 # pylint: disable=redefined-builtin
-iter = Iterator # cause overriding builtins is what the cool kids do
+iter = Iterator  # cause overriding builtins is what the cool kids do

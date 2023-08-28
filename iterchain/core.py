@@ -30,6 +30,7 @@ def chainable(func=None, *, returns_iterable=True):
         [2, 3, 4]
 
     """
+
     def _chainable(func):
         @functools.wraps(func)
         def wrapper(self, *args, **kwargs):
@@ -39,7 +40,7 @@ def chainable(func=None, *, returns_iterable=True):
             return result
 
         if hasattr(Iterator, func.__name__):
-            raise AttributeError("Chainable method {} already exists.".format(func.__name__))
+            raise AttributeError(f"Chainable method {func.__name__} already exists.")
         setattr(Iterator, func.__name__, wrapper)
         return func
 
@@ -60,6 +61,7 @@ def chainable(func=None, *, returns_iterable=True):
 #         return result
 #     return wrapper
 
+
 def magicify(func):
     @functools.wraps(func)
     def wrapper(self, *args, **kwargs):
@@ -71,10 +73,11 @@ def magicify(func):
         if not isinstance(result, Iterator):
             result = Iterator(result)
         return result
+
     return wrapper
 
 
-class Iterator():
+class Iterator:
     """
     Wrapper class around python iterators
 
@@ -100,7 +103,6 @@ class Iterator():
     def __next__(self):
         return next(self._iterator)
 
-
     # ==== TRANSFORMATIONS (Iterator -> Iterator) ====
 
     # TODO:
@@ -109,7 +111,7 @@ class Iterator():
     # step_by
     # group_by (itertools)
 
-    def map(self, function) -> 'Iterator':
+    def map(self, function) -> "Iterator":
         """
         Applies a given function to all elements.
 
@@ -118,34 +120,34 @@ class Iterator():
         """
         return Iterator(builtins.map(function, self))
 
-    def flatten(self) -> 'Iterator':
+    def flatten(self) -> "Iterator":
         return Iterator(itertools.chain.from_iterable(self))
 
-    def flat_map(self, function) -> 'Iterator':
+    def flat_map(self, function) -> "Iterator":
         return self.map(function).flatten()
 
-    def star_map(self, function) -> 'Iterator':
+    def star_map(self, function) -> "Iterator":
         return Iterator(itertools.starmap(function, self))
 
-    def filter(self, function) -> 'Iterator':
+    def filter(self, function) -> "Iterator":
         return Iterator(builtins.filter(function, self))
 
-    def filter_false(self, predicate=None) -> 'Iterator':
+    def filter_false(self, predicate=None) -> "Iterator":
         return Iterator(itertools.filterfalse(predicate, self))
 
-    def enumerate(self, start=0) -> 'Iterator':
+    def enumerate(self, start=0) -> "Iterator":
         return Iterator(builtins.enumerate(self, start))
 
-    def slice(self, *args) -> 'Iterator':
+    def slice(self, *args) -> "Iterator":
         return Iterator(itertools.islice(self, *args))
 
-    def take(self, n) -> 'Iterator':
+    def take(self, n) -> "Iterator":
         return self.slice(0, n)
 
-    def take_while(self, predicate) -> 'Iterator':
+    def take_while(self, predicate) -> "Iterator":
         return Iterator(itertools.takewhile(predicate, self))
 
-    def skip(self, n) -> 'Iterator':
+    def skip(self, n) -> "Iterator":
         # FIXME: kind of a sloppy implementation
         def _skip(iterable, n):
             for _ in range(n):
@@ -155,46 +157,47 @@ class Iterator():
                     return
             for i in iterable:
                 yield i
+
         return Iterator(_skip(self, n))
 
-    def drop(self, n) -> 'Iterator':
+    def drop(self, n) -> "Iterator":
         return self.skip(n)
 
-    def skip_while(self, predicate) -> 'Iterator':
+    def skip_while(self, predicate) -> "Iterator":
         return Iterator(itertools.dropwhile(predicate, self))
 
-    def drop_while(self, predicate) -> 'Iterator':
+    def drop_while(self, predicate) -> "Iterator":
         return self.skip_while(predicate)
 
-    def inspect(self, function) -> 'Iterator':
+    def inspect(self, function) -> "Iterator":
         # FIXME: kind of a sloppy implementation
         def _inspect(iterator, function):
             for i in iterator:
                 function(i)
                 yield i
+
         return Iterator(_inspect(self, function))
 
-    def chain(self, *iterables) -> 'Iterator':
+    def chain(self, *iterables) -> "Iterator":
         return Iterator(itertools.chain(self, *iterables))
 
-    def compress(self, selectors) -> 'Iterator':
+    def compress(self, selectors) -> "Iterator":
         return Iterator(itertools.compress(self, selectors))
 
-    def product(self, *iterables, repeat=1) -> 'Iterator':
+    def product(self, *iterables, repeat=1) -> "Iterator":
         return Iterator(itertools.product(self, *iterables, repeat=repeat))
 
-    def permutations(self, r=None) -> 'Iterator':
+    def permutations(self, r=None) -> "Iterator":
         return Iterator(itertools.permutations(self, r=r))
 
-    def combinations(self, r) -> 'Iterator':
+    def combinations(self, r) -> "Iterator":
         return Iterator(itertools.combinations(self, r))
 
-    def combinations_with_replacement(self, r) -> 'Iterator':
+    def combinations_with_replacement(self, r) -> "Iterator":
         return Iterator(itertools.combinations_with_replacement(self, r))
 
-    def cycle(self) -> 'Iterator':
+    def cycle(self) -> "Iterator":
         return Iterator(itertools.cycle(self))
-
 
     # ==== TERMINATORS (Iterator -> object) ====
 
@@ -239,7 +242,6 @@ class Iterator():
         """
         return self.collect(list)
 
-
     # ==== Generators (new Iterator) ====
 
     # TODO:
@@ -247,15 +249,15 @@ class Iterator():
     # zip (normal, strict, longest) / unzip
 
     @classmethod
-    def range(cls, *args) -> 'Iterator':
+    def range(cls, *args) -> "Iterator":
         """
-        Makes a new iterator that returns evenly spaced values. 
+        Makes a new iterator that returns evenly spaced values.
         (similar to the ``range`` builtin)
         """
         return Iterator(range(*args))
 
     @classmethod
-    def count(cls, start=0, step=1) -> 'Iterator':
+    def count(cls, start=0, step=1) -> "Iterator":
         return Iterator(itertools.count(start, step))
 
     @classmethod
