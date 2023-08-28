@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "iterchain_reese_robertson"
+version = "0.0.1"
+authors = [
+    { name = "Reese Robertson", email = "reese.c.robertson@gmail.com" },
+    { name = "Evelyn-H" },
+]
+description = "Simple ergonomic iterator chaining for Python"
+readme = "README.md"
+license = "GPL-3.0-only"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/reese-robertson/iterchain"
+"Bug Tracker" = "https://github.com/reese-robertson/iterchain/issues"
