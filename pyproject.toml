@@ -22,3 +22,7 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/reese-robertson/iterchain"
 "Bug Tracker" = "https://github.com/reese-robertson/iterchain/issues"
+
+[tool.pylint.main]
+# Disable all Convention and Refactoring checks
+disable = ["C", "R", "fixme", "raise-missing-from"]
