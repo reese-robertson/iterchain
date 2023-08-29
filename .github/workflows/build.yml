@@ -1,4 +1,4 @@
-name: Lints
+name: Build
 
 on:
   pull_request:
@@ -28,3 +28,6 @@ jobs:
     - name: Check code formatting with black
       run: |
         hatch --env lint run black --check .
+    - name: Run tests
+      run: |
+        hatch --env test run pytest
